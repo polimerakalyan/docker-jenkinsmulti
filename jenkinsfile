@@ -2,11 +2,6 @@
 pipeline{
     agent any
         stages{
-            stage("build with maven"){
-                steps{
-                    sh 'mvn clean package -DskipTests'
-                }
-            }
             stage("build docker image"){
                 steps{
                     sh 'docker build -t my-app .'
