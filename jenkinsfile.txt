@@ -1,0 +1,22 @@
+
+pipeline{
+    agent any
+        stages{
+            stage("build with maven"){
+                steps{
+                    sh 'mvn clean package -DskipTests'
+                }
+            }
+            stage("build docker image"){
+                steps{
+                    sh 'docker build -t my-app .'
+                }
+            }
+            stage("docker run conatiner"){
+                steps{
+                    sh 'docker run --name app1 -d -p 8080:8080 my-app'
+                }
+            }
+        }
+    
+}
