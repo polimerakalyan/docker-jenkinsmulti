@@ -1,4 +1,6 @@
 FROM maven AS builder
+RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/polimerakalyan/docker-jenkinsmulti.git
 WORKDIR /BUILD
 COPY pom.xml .
 COPY src ./src
