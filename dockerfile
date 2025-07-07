@@ -4,11 +4,11 @@ RUN git clone https://github.com/polimerakalyan/docker-jenkinsmulti.git
 RUN cd docker-jenkinsmulti
 WORKDIR /BUILD
 COPY pom.xml .
-COPY src ./src
+COPY src /BUILD
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=builder /BUILD/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+CMD ["java","-jar","app.jar"]
